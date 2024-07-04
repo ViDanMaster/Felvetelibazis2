@@ -104,7 +104,7 @@ const GenerateTextComponent = ({ fontSize, color, index, item, parentStyle = nul
         text = decode(adaptor.value(item) || '');
         rnStyle = (parentStyle ? parentStyle : null);
     } else if (item?.kind === 'br') { 
-        text = '\n\n';
+        text = '\n';
         rnStyle = { width: '100%', overflow: 'hidden', height: 0 };
     }
 

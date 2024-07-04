@@ -7,8 +7,11 @@ import Menu from "../components/common/Menu";
 import { ValaszokContextProvider } from "../components/Feladatok/ValaszokContext";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SQLiteProvider } from "expo-sqlite";
+import { LogBox } from "react-native";
 
 const Stack = createNativeStackNavigator();
+
+LogBox.ignoreLogs(['Require cycle:']);
 
 export default function App() {
   return (

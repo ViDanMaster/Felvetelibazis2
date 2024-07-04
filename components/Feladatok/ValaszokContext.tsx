@@ -1,5 +1,4 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
-import { getFeladatCount } from '../database/Db';
+import React, { createContext, useContext, useMemo, useState } from 'react';
 import { Feladat } from '../database/Feladat';
 
 type ValaszokContextType = {

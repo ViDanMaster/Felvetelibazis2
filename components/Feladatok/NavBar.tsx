@@ -3,7 +3,6 @@ import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { AntDesign as Icon } from '@expo/vector-icons';
 import styles from "./Feladat.style";
 import { useValaszokContext } from "./ValaszokContext";
-import { Feladat } from "../database/Feladat";
 import { useNavigation } from "@react-navigation/native";
 import Magyarazat from "./Magyarazat";
 
@@ -13,7 +12,7 @@ interface NavBarProps {
 }
 
 type ResultNavigationProps = {
-    navigate: (screen: string, params: {Feladatok: Feladat[], Pontszam: number, SelectedAnswers: { index: number; selectedAnswerIndex: number }[]}) => void
+    navigate: (screen: string, params: {Pontszam: number}) => void
   };
 
 const NavBar: React.FC<NavBarProps> = React.memo(({index, flatListRef}) => {
@@ -32,7 +31,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({index, flatListRef}) => {
     setEllenorizve(updatedEllenorizve);
     console.log(answeredQuestions)
 
-    if (answeredQuestions[index].selectedAnswerIndex === feladatok[index].Megoldas - 1) {
+    if (answeredQuestions[index].selectedAnswerIndex === (feladatok[index].Megoldas - 1)) {
       const updatedPontszam = pontszam + feladatok[index].Pont;
       setPontszam(updatedPontszam);
     }
@@ -89,9 +88,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({index, flatListRef}) => {
                 style={styles.nextOrPrevBtn}
                 onPress={() => {
                   navigation.navigate('Eredmeny', {
-                    Feladatok: feladatok,
                     Pontszam: pontszam,
-                    SelectedAnswers: answeredQuestions,
                   });
                 }}
               >

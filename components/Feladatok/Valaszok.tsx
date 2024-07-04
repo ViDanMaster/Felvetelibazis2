@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { TouchableOpacity } from 'react-native';
 
 import styles from './Valaszok.style';
-import { MathJaxSvg } from 'react-native-mathjax-html-to-svg';
+import MathJaxSvgHtmlWithoutFeladat from '../common/MathjaxSvg/MathJaxSvgHtmlWithoutFeladat';
 
 interface ValaszokProps {
   valasz: string;
@@ -31,7 +31,7 @@ const Valaszok: React.FC<ValaszokProps> = React.memo(
         onPress={onSelection}
         disabled={ellenorizve}
       >
-        <MathJaxSvg style={styles.valaszMathJax}>{`<span class='valasz' style='overflow: hidden; user-select: none; display: table; margin: 0 auto; font-size: 7vw;'>${valasz}</span>`}</MathJaxSvg>
+        <MathJaxSvgHtmlWithoutFeladat text={`<span class='valasz' style='overflow: hidden;'>${valasz}</span>`} fontSize={18} />
       </TouchableOpacity>
     );
   },(prevProps, nextProps) => {

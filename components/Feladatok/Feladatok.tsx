@@ -7,7 +7,7 @@ import styles from "./Feladat.style";
 import ValaszokGroup from "./ValaszokGroup";
 import { svgs } from '../../constants';
 import { Feladat } from '../database/Feladat';
-import MathJaxSvgHtml from '../common/TesztKomponens';
+import MathJaxSvgHtml from '../common/MathJaxSvgHtml';
 
 interface FeladatokProps {
   feladat: Feladat;
@@ -41,10 +41,10 @@ const Feladatok: React.FC<FeladatokProps> = React.memo(({ feladat, index }) => {
           <Text style={styles.feladatSzamText}>{1}.</Text>
         </View>
         <View style={styles.kerdesContainer}>
-          <MathJaxSvgHtml feladat={feladat.Kerdes} />
+          <MathJaxSvgHtml feladat={feladat.Kerdes} fontSize={18} />
           {feladat.Kerdes2 && <SvgXml width={300} height={300} xml={svgValue} />}
           {feladat.Kerdes3 && (
-            <MathJaxSvgHtml feladat={feladat.Kerdes3}/>)}
+            <MathJaxSvgHtml feladat={feladat.Kerdes3} fontSize={18}/>)}
         </View>
 
       </View>

@@ -3,21 +3,23 @@ import { View, Text } from 'react-native';
 
 import styles from '../eredmeny/Eredmeny.style';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import ResultButton from '../eredmeny/EredmenyCard';
 import { Feladat } from '../database/Feladat';
 import { FlashList } from '@shopify/flash-list';
+import EredmenyCard from '../eredmeny/EredmenyCard';
+import { useValaszokContext } from '../Feladatok/ValaszokContext';
 
 interface ResultProps {
   navigation: any;
   route: any;
 }
 
-let erdemjegyStyle = {}
-
-const Result: React.FC<ResultProps> = ({ navigation, route }) => {
-  const { Feladatok, Pontszam, SelectedAnswers } = route.params;
+const Result = React.memo(({navigation, route}: {navigation : any, route : any}) => {
+  const { Pontszam } = route.params;
+  const { answeredQuestions, feladatok } = useValaszokContext();
   const [osszPontszam, setOsszPontszam] = useState<number>(1);
   const [erdemjegy, setErdemjegy] = useState<number>(0);
+  const [erdemjegyStyle, setErdemjegyStyle] = useState<any>({});
+  
   const Szazalek = roundTo((Pontszam / osszPontszam) * 100, 2);
 
   function roundTo(n: number, digits: number) {
@@ -33,7 +35,7 @@ const Result: React.FC<ResultProps> = ({ navigation, route }) => {
 
   useEffect(() => {
     OsszPontszamSzamolas();
-  }, [Feladatok]);
+  }, [feladatok]);
 
   useEffect(() => {
     ErdemjegySzamolas();
@@ -41,7 +43,7 @@ const Result: React.FC<ResultProps> = ({ navigation, route }) => {
 
   const OsszPontszamSzamolas = () => {
     let OsszPontszam = 0;
-    Feladatok.forEach((element: Feladat) => {
+    feladatok.forEach((element: Feladat) => {
       OsszPontszam += element.Pont;
     });
     setOsszPontszam(OsszPontszam);
@@ -51,34 +53,39 @@ const Result: React.FC<ResultProps> = ({ navigation, route }) => {
     switch (true) {
       case Szazalek < 25.0:
         setErdemjegy(1);
-        erdemjegyStyle = {color: '#ff0000'}
+        setErdemjegyStyle({ color: '#ff0000' });
         break;
       case Szazalek < 40.0:
         setErdemjegy(2);
-        erdemjegyStyle = {color: '#ff6600'}
+        setErdemjegyStyle({ color: '#ff6600'});
         break;
       case Szazalek < 60.0:
         setErdemjegy(3);
-        erdemjegyStyle = {color: '#ffff66'}
+        setErdemjegyStyle({ color: '#ffff66'});
         break;
       case Szazalek < 80.0:
         setErdemjegy(4);
-        erdemjegyStyle = {color: '#ccff66'}
+        setErdemjegyStyle({ color: '#ccff66'});
         break;
       case Szazalek >= 80.0:
         setErdemjegy(5);
-        erdemjegyStyle = {color: '#00ff00'}
+        setErdemjegyStyle({ color: '#00ff00'});
         break;
     }
   };
 
-  const renderItem = ({ item, index }: { item: Feladat; index: number }) => (
-    <ResultButton
-      selectedAnswers={'Valasz' + (SelectedAnswers[index] + 1)}
-      pontszam={item.Pont}
-      feladat={item}
-    />
-  );
+  const renderItem = ({ item, index }: { item: Feladat; index: number }) => {
+    const selectedAnswerForQuestion = answeredQuestions[index].selectedAnswerIndex;
+
+    const pontszam = selectedAnswerForQuestion === (item.Megoldas - 1) ? item.Pont : 0;
+
+    return (
+      <EredmenyCard
+        pontszam={pontszam}
+        feladat={item}
+      />
+    );
+  };
 
   return (
     <SafeAreaView style={styles.screen}>
@@ -99,7 +106,7 @@ const Result: React.FC<ResultProps> = ({ navigation, route }) => {
         </View>
       </View>
       <FlashList
-        data={Feladatok}
+        data={feladatok}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
         estimatedItemSize={145}
@@ -107,6 +114,6 @@ const Result: React.FC<ResultProps> = ({ navigation, route }) => {
       />
     </SafeAreaView>
   );
-};
+});
 
 export default Result;
