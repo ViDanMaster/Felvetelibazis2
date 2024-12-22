@@ -1,3 +1,9 @@
-Felvételibázis
+#Felvételibázis - Magyar Érettségi Felkészítő Alkalmazás
 
-A Felvételibázis egy React Native alapú mobilalkalmazás, amely kifejezetten a magyar érettségi vizsgára való felkészülést támogatja. Az alkalmazás hasznos tananyagot, gyakorló feladatokat és különféle statisztikai eszközöket kínál, hogy a felhasználók hatékonyabban készülhessenek a vizsgákra.
+##Áttekintés
+
+A Felvételibázis egy mobilalkalmazás, amely segít a magyar érettségi vizsgára történő felkészülésben. Az alkalmazásban interaktív feladatok, tananyagok és önellenőrző kérdések állnak rendelkezésre, hogy a tanulás hatékonyabb és élvezetesebb legyen.
+
+##Public repo
+
+Ez a repo az alkalmazás csak egy részletét tartalmazza referenciaként arra, amit már évek óta csinálunk.
