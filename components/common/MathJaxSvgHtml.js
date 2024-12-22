@@ -7,7 +7,7 @@ const MathJaxSvgHtml = ({ feladat, fontSize}) => {
   return (
     <View>
       <MathJaxSvg fontSize={fontSize} customStyle={styles.text} >
-        {`<div><p style="display: inline;">${feladat}</p></div>`}
+        {`${feladat}`}
       </MathJaxSvg>
     </View>
   );

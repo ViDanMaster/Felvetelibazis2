@@ -1,5 +1,5 @@
 import React, {  } from 'react';
-import { Text, View, Dimensions, StyleSheet, ScrollView } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 
 import {MathJaxSvg} from 'react-native-mathjax-html-to-svg';
@@ -8,19 +8,12 @@ import ValaszokGroup from "./ValaszokGroup";
 import { svgs } from '../../constants';
 import { Feladat } from '../database/Feladat';
 import MathJaxSvgHtml from '../common/MathJaxSvgHtml';
+import InlineSvgAndText from '../common/InlineSvgAndText';
 
 interface FeladatokProps {
   feladat: Feladat;
   index: number;
 }
-
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
-
-const stylesDarab = StyleSheet.create({
-  kerdesWrapper: {
-    width: windowWidth,
-  },
-});
 
 const Feladatok: React.FC<FeladatokProps> = React.memo(({ feladat, index }) => {
   Feladatok.displayName = "Feladatok";
@@ -35,16 +28,16 @@ const Feladatok: React.FC<FeladatokProps> = React.memo(({ feladat, index }) => {
   }
 
   return (
-    <ScrollView style={{ height: windowHeight - styles.navContainer.height }}>
-      <View style={stylesDarab.kerdesWrapper}>
+    <ScrollView style={styles.kerdesScrollView}>
+      <View style={styles.kerdesWrapper}>
         <View style={styles.feladatSzamTextContainer}>
-          <Text style={styles.feladatSzamText}>{1}.</Text>
+          <Text style={styles.feladatSzamText}>{index + 1}.</Text>
         </View>
         <View style={styles.kerdesContainer}>
-          <MathJaxSvgHtml feladat={feladat.Kerdes} fontSize={18} />
+          <MathJaxSvgHtml feladat={"     " + feladat.Kerdes} fontSize={16} />
           {feladat.Kerdes2 && <SvgXml width={300} height={300} xml={svgValue} />}
           {feladat.Kerdes3 && (
-            <MathJaxSvgHtml feladat={feladat.Kerdes3} fontSize={18}/>)}
+            <InlineSvgAndText/>)}
         </View>
 
       </View>

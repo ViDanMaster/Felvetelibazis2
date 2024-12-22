@@ -13,8 +13,8 @@ interface ResultProps {
   route: any;
 }
 
-const Result = React.memo(({navigation, route}: {navigation : any, route : any}) => {
-  const { Pontszam } = route.params;
+const Result = React.memo(({ navigation, route }: ResultProps) => {
+  const { Pontszam   } = route.params;
   const { answeredQuestions, feladatok } = useValaszokContext();
   const [osszPontszam, setOsszPontszam] = useState<number>(1);
   const [erdemjegy, setErdemjegy] = useState<number>(0);
@@ -24,7 +24,7 @@ const Result = React.memo(({navigation, route}: {navigation : any, route : any})
 
   function roundTo(n: number, digits: number) {
     if (digits === undefined) {
-      digits = 0;
+      digits = 1;
     }
   
     var multiplicator = Math.pow(10, digits);
@@ -82,6 +82,7 @@ const Result = React.memo(({navigation, route}: {navigation : any, route : any})
     return (
       <EredmenyCard
         pontszam={pontszam}
+        index={index+1}
         feladat={item}
       />
     );
@@ -114,6 +115,8 @@ const Result = React.memo(({navigation, route}: {navigation : any, route : any})
       />
     </SafeAreaView>
   );
+}, (prevProps, nextProps) => {
+  return prevProps.route.Pontszam === nextProps.route.Pontszam;
 });
 
 export default Result;

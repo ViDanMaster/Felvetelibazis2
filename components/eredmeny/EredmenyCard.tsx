@@ -6,11 +6,13 @@ import { MathJaxSvg } from 'react-native-mathjax-html-to-svg';
 
 interface ResultButtonProps {
     pontszam: number
+    index: number,
     feladat: Feladat,
 }
 
 const EredmenyCard: React.FC<ResultButtonProps> = ({
     pontszam,
+    index,
     feladat
 }) => {
     // Pontszám színének meghatározása
@@ -19,7 +21,7 @@ const EredmenyCard: React.FC<ResultButtonProps> = ({
     return(
         <TouchableOpacity style={styles.card}>
             <View style={styles.textContainer}>
-                <Text style={styles.feladatszamText}>{1}.</Text>
+                <Text style={styles.feladatszamText}>{index}.</Text>
             </View>
             <MathJaxSvg fontSize={18} style={styles.webView}>{`<div class="kerdes-preview">${feladat.Kerdes.substring(0,70)}..</div>`}</MathJaxSvg>
             <View style={[styles.textContainer, {alignItems: 'flex-end'}]}>

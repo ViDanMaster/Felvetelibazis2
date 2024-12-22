@@ -1,28 +1,44 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
 import { COLORS, FONT, SIZES } from "../../constants";
 
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+
+const circleSize = Math.min(windowWidth * 0.1, 60);
+const fontSize = Math.min(windowWidth * 0.045, 24);
+
 const styles = StyleSheet.create({
+    kerdesScrollView: {
+        height: windowHeight - 80,
+    },
+    kerdesContentContainer: {
+        flex: 1,
+        marginLeft: circleSize * 0.5
+      },
+    kerdesWrapper: {
+        width: windowWidth,
+      },
     kerdesContainer: {
+        alignItems: 'center',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        flexShrink: 1,
         marginRight: 15,
         marginLeft: 15,
-        marginTop: 20, // +5 for scrollbar outplay
-        marginBottom: 5, // -10 for scrollbar outplay
-        paddingRight: 5,
-        paddingLeft: 5,
-        paddingTop: 5, // +10 for scrollbar outplay
-        paddingBottom: 5, // -5 for scrollbar outplay
+        marginTop: 20,
+        marginBottom: 5,
+        padding: windowWidth * 0.03,
         borderRadius: 5,
         backgroundColor: "#FFFFFF",
         shadowColor: "#000",
         shadowOffset: {
-            width: 0,
-            height: 1,
+          width: 0,
+          height: 1,
         },
         shadowOpacity: 0.22,
         shadowRadius: 2.22,
         elevation: 3,
-    },
+      },
     kerdesMathJax: {
         backgroundColor:'transparent',
     },
@@ -32,14 +48,17 @@ const styles = StyleSheet.create({
     },
     navContainer: {
         backgroundColor: "#fff9ec",
-        height: 80,
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
         zIndex: 10,
         justifyContent: 'center',
         alignItems: 'center',
     },
     navBar: {
         flex: 1,
-        width: "80%",
+        width: "90%",
         justifyContent: 'center',
         flexDirection: 'row',
         paddingBottom: 10,
@@ -73,8 +92,8 @@ const styles = StyleSheet.create({
         marginLeft: 10,
     },
     ellenorzesBtn: {
-        flex: 1,
-        justifyContent: 'center',
+        paddingVertical: 15,
+        paddingHorizontal: 15,
         borderRadius: 20,
     },
     activeBtn: {
@@ -102,29 +121,30 @@ const styles = StyleSheet.create({
         color: "#777777",
     },
     feladatSzamText: {
-        fontSize: 24,
+        fontSize: fontSize,
         fontWeight: '800',
     },
     feladatSzamTextContainer: {
+        width: circleSize,
+        height: circleSize,
+        borderRadius: circleSize / 2,
         backgroundColor: "#FFFFFF",
-        borderRadius: 45,
+        justifyContent: 'center',
+        alignItems: 'center',
         shadowColor: "#000",
         shadowOffset: {
-            width: 0,
-            height: 1,
+          width: 0,
+          height: 1,
         },
         shadowOpacity: 0.22,
         shadowRadius: 2.22,
         elevation: 3,
-
-        width: 45,
-        height: 45,
         zIndex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',
-        left: 5,
-        top: 5,
+        left: windowWidth * 0.01,
+        top: windowWidth * 0.01,
     },
     text: {
         fontSize: 16,

@@ -40,7 +40,6 @@ const NavBar: React.FC<NavBarProps> = React.memo(({index, flatListRef}) => {
     return (
         <View style={styles.navContainer}>
         <View style={styles.navBar}>
-          <Text>{pontszam}</Text>
           <View style={[styles.navBtnContainer, styles.prev]}>
             {index > 0 && (
               <TouchableOpacity
